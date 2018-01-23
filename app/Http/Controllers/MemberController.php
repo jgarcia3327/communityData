@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Address;
+use App\GovernmentID;
+use App\Member;
+use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -14,6 +19,7 @@ class MemberController extends Controller
     public function index()
     {
         //
+        dd("TODO");
     }
 
     /**
@@ -34,7 +40,15 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $register = array(
+          "email" => $request->email,
+          "password" => bcrypt("123456789"),
+          "created_at" => Carbon::now(),
+          "updated_at" => Carbon::now(),
+        );
+        User::insert($register);
+        return view('member.create');
     }
 
     /**

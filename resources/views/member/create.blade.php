@@ -9,7 +9,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Add Member</div>
 
-                <form action="" method="post">
+                <form action="{{ url('member') }}" method="POST">
+                  {{ csrf_field() }}
                   <div class="panel-body">
 
                       <!-- Name -->
@@ -17,15 +18,15 @@
                           <h3>Name</h3>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="lname">Last Name</label>
-                              <input type="text" class="form-control" id="lname" name="lname" aria-describedby="nameHelp">
+                              <label for="lname">*Last Name</label>
+                              <input type="text" class="form-control" id="lname" name="lname" aria-describedby="nameHelp" required>
                               <!-- <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="fname">Given Name</label>
-                              <input type="text" class="form-control" id="fname" name="fname">
+                              <label for="fname">*Given Name</label>
+                              <input type="text" class="form-control" id="fname" name="fname" required>
                             </div>
                           </div>
                           <div class="col-md-4">
@@ -55,8 +56,8 @@
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="email">Email Address</label>
-                              <input type="text" class="form-control" id="email" name="email">
+                              <label for="email">*Email Address</label>
+                              <input type="text" class="form-control" id="email" name="email" required>
                             </div>
                           </div>
                       </div>
@@ -311,7 +312,7 @@
 
                           <div class="row">
                             <div class="col-md-12" style="text-align: right;">
-                              <button class="btn btn-lg btn-primary">Submit</button>
+                              <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
                             </div>
                           </div>
 
