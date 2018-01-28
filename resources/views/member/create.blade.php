@@ -13,6 +13,10 @@
                   {{ csrf_field() }}
                   <div class="panel-body">
 
+                    @if (!empty(session('success')))
+                      <h3><i class="text-success">{{{session('success')}}}</i></h3>
+                    @endif
+
                       <!-- Name -->
                       <div class="row">
                           <h3>Name</h3>
@@ -56,8 +60,8 @@
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label for="email">*Email Address</label>
-                              <input type="text" class="form-control" id="email" name="email" required>
+                              <label for="email">Email Address</label>
+                              <input type="text" class="form-control" id="email" name="email" value="">
                             </div>
                           </div>
                       </div>
@@ -149,9 +153,9 @@
                           </div>
                           <div class="form-group">
                             <label for="num_children">Number of Children</label>
-                            <input type="text" class="form-control" id="num_children" name="num_children">
+                            <input type="number" class="form-control" id="num_children" name="num_children">
                             <label for="num_dependencies">Number of Dependents</label>
-                            <input type="text" class="form-control" id="num_dependencies" name="num_dependencies">
+                            <input type="number" class="form-control" id="num_dependencies" name="num_dependencies">
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -182,7 +186,7 @@
                           <div class="form-group">
                             <label for="religion">Education Attainment</label>
                             <label class="radio-inline">
-                              <input type="radio" name="education" value="0"> Post Graduate
+                              <input type="radio" name="education" value="0" checked> Post Graduate
                             </label>
                             <label class="radio-inline">
                               <input type="radio" name="education" value="1"> Graduate
@@ -202,7 +206,7 @@
                             <div class="form-group">
                               <label for="occupation">Occupation</label>
                               <label class="radio-inline">
-                                <input type="radio" name="occupation" value="0"> Employed
+                                <input type="radio" name="occupation" value="0" checked> Employed
                               </label>
                               <label class="radio-inline">
                                 <input type="radio" name="occupation" value="1"> Self Employed
@@ -239,7 +243,7 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="num_earners">Number of Household Earners</label>
-                                <input type="text" class="form-control" id="num_earners" name="num_earners">
+                                <input type="number" class="form-control" id="num_earners" name="num_earners">
                                 <label for="total_income_month">Total Household Income Per Month</label>
                                 <input type="text" class="form-control" id="total_income_month" name="total_income_month">
                               </div>
@@ -325,6 +329,7 @@
 @endsection
 
 @section('javascript')
+<!-- Date Picker -->
 <script type="text/javascript">
   $( function() {
     $( "#dob" ).datepicker({
@@ -334,5 +339,26 @@
       dateFormat: 'yy-mm-dd'
     });
   } );
+</script>
+<!-- Email check -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("form").submit(function(event){
+      var emailStr = $("input[name='email']").val();
+      // Continue if empty for null email. Auto nu
+      if( emailStr != "") {
+        // Check if it's a valid email
+        if (!isEmail(emailStr)) {
+          event.preventDefault();
+          alert("Invalid email.");
+        }
+      }
+    });
+  });
+
+  function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+  }
 </script>
 @endsection

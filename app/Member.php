@@ -22,9 +22,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Member extends Model
 {
+
+    public $timestamps = false;
+    
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'sector_president_id', 'encoder_id', 'fname', 'lname', 'mname', 'nname', 'mnumber', 'lnumber', 'dob', 'pob', 'create_date', 'modify_date'];
+    protected $fillable = ['user_id', 'sector_president_id', 'encoder_id', 'fname', 'lname', 'mname', 'nname', 'mnumber', 'lnumber', 'dob', 'pob'];
 
 }

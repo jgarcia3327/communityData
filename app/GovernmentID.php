@@ -19,9 +19,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class GovernmentID extends Model
 {
+
+    public $timestamps = false;
+    
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'government_ids';
@@ -29,6 +32,6 @@ class GovernmentID extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'is_pwd', 'pwd_disability', 'pwd_id', 'senior_id', 'solo_parent_id', 'is_voter', 'last_vote', 'create_date', 'modify_date'];
+    protected $fillable = ['user_id', 'is_pwd', 'pwd_disability', 'pwd_id', 'senior_id', 'solo_parent_id', 'is_voter', 'last_vote'];
 
 }

@@ -16,9 +16,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Address extends Model
 {
+
+    public $timestamps = false;
+    
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'address';
@@ -26,6 +29,6 @@ class Address extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'type', 'house_street', 'sitio', 'zip', 'create_date', 'modify_date'];
+    protected $fillable = ['user_id', 'type', 'house_street', 'sitio', 'zip'];
 
 }

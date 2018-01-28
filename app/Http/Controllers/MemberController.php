@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Address;
 use App\GovernmentID;
+use App\HouseHold;
 use App\Member;
+use App\Status;
 use Carbon\Carbon;
+use App\Http\Controllers\CommonController;
+use Auth;
 
 class MemberController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -40,15 +45,54 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $register = array(
-          "email" => $request->email,
-          "password" => bcrypt("123456789"),
-          "created_at" => Carbon::now(),
-          "updated_at" => Carbon::now(),
+
+        // REGISTER USER
+        // Random register password
+        $passwordRand = CommonController::generateRandomString(12);
+        $user_data = array(
+          "email" => empty($request->email)? null : $request->email,
+          "password" => bcrypt($passwordRand)
         );
-        User::insert($register);
-        return view('member.create');
+        $user_id = User::create($user_data)->id;
+
+        // Add user_id from $request
+        $request->request->add(['user_id' => $user_id]);
+        // Add encoder_id
+        $request->request->add(['encoder_id' => Auth::user()->id]);
+
+        // ADD MEMBER DATA
+        $member_id = Member::create($request->all())->id;
+
+        // ADD ADDRESS DATA
+        // Current address
+        $address_data = array(
+          "user_id" => $user_id,
+          "type" => 0,
+          "house_street" => $request->house_street[0],
+          "sitio" => $request->sitio[0],
+          "zip" => $request->zip[0]
+        );
+        $current_address_id = Address::create($address_data)->id;
+        // Provincial address
+        $address_data = array(
+          "user_id" => $user_id,
+          "type" => 1,
+          "house_street" => $request->house_street[1],
+          "sitio" => $request->sitio[1],
+          "zip" => $request->zip[1]
+        );
+        $provincial_address_id = Address::create($address_data)->id;
+
+        // ADD GOVERNMENT IDS DATA
+        $govenmentID_id = GovernmentID::create($request->all())->id;
+
+        // ADD HOUSEHOLD DATA
+        $household_id = Household::create($request->all())->id;
+
+        // ADD STATUS DATA
+        $status_id = Status::create($request->all())->id;
+
+        return back()->with('success', $request->lname.", ".$request->fname." ".$request->mname." has been successfull added!");
     }
 
     /**

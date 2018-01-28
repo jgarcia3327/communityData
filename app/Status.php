@@ -21,9 +21,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Status extends Model
 {
+  
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'status';
@@ -31,6 +34,6 @@ class Status extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'sector', 'civil_status', 'num_children', 'num_dependents', 'religion', 'education', 'occupation', 'income', 'med_insurance', 'create_date', 'modify_date'];
+    protected $fillable = ['user_id', 'sector', 'civil_status', 'num_children', 'num_dependents', 'religion', 'education', 'occupation', 'income', 'med_insurance'];
 
 }
