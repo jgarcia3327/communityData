@@ -11,13 +11,14 @@
   <title>{{ Config::get("app.name") }} | @yield('html_title')</title>
 
   <!-- Icons -->
-  <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
   <!-- Main styles for this application -->
   <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
   <!-- Styles required by this views -->
 
   <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
 </head>
 
@@ -32,7 +33,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <ul class="nav navbar-nav d-md-down-none">
+    <!-- <ul class="nav navbar-nav d-md-down-none">
       <li class="nav-item px-3">
         <a class="nav-link" href="#">Dashboard</a>
       </li>
@@ -42,9 +43,10 @@
       <li class="nav-item px-3">
         <a class="nav-link" href="#">Settings</a>
       </li>
-    </ul>
+    </ul> -->
+
     <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item d-md-down-none">
+      <!-- <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
       </li>
       <li class="nav-item d-md-down-none">
@@ -52,12 +54,13 @@
       </li>
       <li class="nav-item d-md-down-none">
         <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
-      </li>
+      </li> -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <!-- <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
+        </a> -->
+        {{ Auth::user()->email }}
+        <!-- <div class="dropdown-menu dropdown-menu-right">
           <div class="dropdown-header text-center">
             <strong>Account</strong>
           </div>
@@ -75,7 +78,7 @@
           <div class="divider"></div>
           <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock Account</a>
           <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
-        </div>
+        </div> -->
       </li>
     </ul>
     <button class="navbar-toggler aside-menu-toggler" type="button">
@@ -89,105 +92,31 @@
         <nav class="sidebar-nav">
           <ul class="nav">
             <li class="nav-item">
-              <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-primary">NEW</span></a>
+              <a class="nav-link nav-link-success" href="{{url('home')}}"><i class="icon-speedometer"></i> Dashboard </a><!-- <span class="badge badge-primary">NEW</span></a> -->
             </li>
 
             <li class="nav-title">
-              Theme
+              ADD
             </li>
             <li class="nav-item">
-              <a href="colors.html" class="nav-link"><i class="icon-drop"></i> Colors</a>
+              <a href="{{ url('member/create') }}" class="nav-link"><i class="fa fa-user-plus"></i> Add Member </a>
             </li>
             <li class="nav-item">
-              <a href="typography.html" class="nav-link"><i class="icon-pencil"></i> Typograhy</a>
+              <a href="#" class="nav-link"><i class="fa fa-plus-circle"></i> Add Encoder</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"><i class="fa fa-plus-square"></i> Add Sector President</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"><i class="fa fa-user-secret"></i> Add Kaabag Admin</a>
             </li>
             <li class="nav-title">
-              Components
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Base</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="base-breadcrumb.html"><i class="icon-puzzle"></i> Breadcrumb</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-cards.html"><i class="icon-puzzle"></i> Cards</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-carousel.html"><i class="icon-puzzle"></i> Carousel</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-collapse.html"><i class="icon-puzzle"></i> Collapse</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-forms.html"><i class="icon-puzzle"></i> Forms</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-jumbotron.html"><i class="icon-puzzle"></i> Jumbotron</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-list-group.html"><i class="icon-puzzle"></i> List group</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-navs.html"><i class="icon-puzzle"></i> Navs</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-pagination.html"><i class="icon-puzzle"></i> Pagination</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-popovers.html"><i class="icon-puzzle"></i> Popovers</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-progress.html"><i class="icon-puzzle"></i> Progress</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-switches.html"><i class="icon-puzzle"></i> Switches</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-tables.html"><i class="icon-puzzle"></i> Tables</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-tabs.html"><i class="icon-puzzle"></i> Tabs</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="base-tooltips.html"><i class="icon-puzzle"></i> Tooltips</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-cursor"></i> Buttons</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons-buttons.html"><i class="icon-cursor"></i> Buttons</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons-button-group.html"><i class="icon-cursor"></i> Buttons Group</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons-dropdowns.html"><i class="icon-cursor"></i> Dropdowns</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="buttons-social-buttons.html"><i class="icon-cursor"></i> Social Buttons</a>
-                </li>
-              </ul>
+              REPORTS
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Charts</a>
+              <a class="nav-link" href="charts.html"><i class="fa fa-align-justify"></i> Charts</a>
             </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="icons-flags.html"><i class="icon-star"></i> Flags <span class="badge badge-success">NEW</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="icons-font-awesome.html"><i class="icon-star"></i> Font Awesome <span class="badge badge-secondary">4.7</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="icons-simple-line-icons.html"><i class="icon-star"></i> Simple Line Icons</a>
-                </li>
-              </ul>
-            </li>
+            <!--
             <li class="nav-item nav-dropdown">
               <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-bell"></i> Notifications</a>
               <ul class="nav-dropdown-items">
@@ -205,7 +134,10 @@
             <li class="nav-item">
               <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets <span class="badge badge-primary">NEW</span></a>
             </li>
+          -->
             <li class="divider"></li>
+
+            <!--
             <li class="nav-title">
               Extras
             </li>
@@ -232,6 +164,7 @@
             <li class="nav-item">
               <a class="nav-link nav-link-danger" href="http://coreui.io/pro/" target="_top"><i class="icon-layers"></i> Try CoreUI <strong>PRO</strong></a>
             </li>
+          -->
 
           </ul>
         </nav>
@@ -242,22 +175,22 @@
       <main class="main">
 
         <!-- Breadcrumb -->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
+        <!-- <ol class="breadcrumb"> -->
+          <!-- <li class="breadcrumb-item">Home</li>
           <li class="breadcrumb-item"><a href="#">Admin</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Dashboard</li> -->
 
           <!-- Breadcrumb Menu-->
-          <li class="breadcrumb-menu d-md-down-none">
+          <!-- <li class="breadcrumb-menu d-md-down-none">
             <div class="btn-group" role="group" aria-label="Button group">
               <a class="btn" href="#"><i class="icon-speech"></i></a>
               <a class="btn" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
               <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
             </div>
-          </li>
-        </ol>
+          </li>-->
+        <!-- </ol> -->
 
-        <div class="container-fluid">
+        <div class="container-fluid blade-container">
 
           @yield('content')
 
@@ -268,14 +201,14 @@
       <aside class="aside-menu">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
+            <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="fa fa-gear"></i></a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="fa fa-gear"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="icon-settings"></i></a>
-          </li>
+            <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-gear"></i></a>
+          </li> -->
         </ul>
 
         <!-- Tab panes -->
@@ -375,7 +308,8 @@
             </div>
             <hr class="mx-3 my-0">
           </div>
-          <div class="tab-pane p-3" id="messages" role="tabpanel">
+
+          <!-- <div class="tab-pane p-3" id="messages" role="tabpanel">
             <div class="message">
               <div class="py-3 pb-5 mr-3 float-left">
                 <div class="avatar">
@@ -450,8 +384,9 @@
               <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
               <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
             </div>
-          </div>
-          <div class="tab-pane p-3" id="settings" role="tabpanel">
+          </div> -->
+
+          <!-- <div class="tab-pane p-3" id="settings" role="tabpanel">
             <h6>Settings</h6>
 
             <div class="aside-options">
@@ -538,14 +473,15 @@
               <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small class="text-muted">25GB/256GB</small>
-          </div>
+          </div> -->
+
         </div>
       </aside>
 
     </div>
 
     <footer class="app-footer">
-      <span><a href="http://kaabab.org">Kaabag Org</a> &copy; {{date('y')}}.</span>
+      <span><a href="http://kaabab.org">Kaabag Org</a> &copy; {{date('Y')}}.</span>
       <!-- <span class="ml-auto">Powered by <a href="http://cebushopping.com">CebuShopping</a></span> -->
     </footer>
 

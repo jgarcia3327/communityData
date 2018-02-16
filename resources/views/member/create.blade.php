@@ -7,19 +7,19 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Add Member</div>
+                <div class="panel-heading"><h3>Add Member</h3></div>
 
                 <form action="{{ url('member') }}" method="POST">
                   {{ csrf_field() }}
                   <div class="panel-body">
 
                     @if (!empty(session('success')))
-                      <h3><i class="text-success">{{{session('success')}}}</i></h3>
+                      <h4><i class="text-success">{{{session('success')}}}</i></h4>
                     @endif
 
                       <!-- Name -->
+                      <h4>Name</h4>
                       <div class="row">
-                          <h3>Name</h3>
                           <div class="col-md-4">
                             <div class="form-group">
                               <label for="lname">*Last Name</label>
@@ -87,8 +87,8 @@
                       <hr/>
 
                       <!-- Address (Present)-->
+                      <h4>Present Address</h4>
                       <div class="row">
-                        <h3>Present Address</h3>
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for="house_street">House No. and Street</label>
@@ -110,8 +110,8 @@
                       </div>
 
                       <!-- Address (Provincial)-->
+                      <h4>Provincial Address</h4>
                       <div class="row">
-                        <h3>Provincial Address</h3>
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for="house_street">House No. and Street</label>
@@ -184,7 +184,7 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                            <label for="religion">Education Attainment</label>
+                            <label class="right-q" for="religion">Education Attainment:</label>
                             <label class="radio-inline">
                               <input type="radio" name="education" value="0" checked> Post Graduate
                             </label>
@@ -204,7 +204,7 @@
                       <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
-                              <label for="occupation">Occupation</label>
+                              <label class="right-q" for="occupation">Occupation:</label>
                               <label class="radio-inline">
                                 <input type="radio" name="occupation" value="0" checked> Employed
                               </label>
@@ -224,7 +224,7 @@
                         <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="income">Income</label> <br/>
+                                <label class="right-q" for="income">Income:</label> <br/>
                                 <div class="radio"><label>
                                   <input type="radio" name="income" value="0"> Above Minimum Wage
                                 </label></div>
@@ -239,6 +239,7 @@
                             </div>
                         </div>
 
+                        <br/>
                         <div class="row">
                             <div class="col-md-4">
                               <div class="form-group">
@@ -250,7 +251,7 @@
                             </div>
                             <div class="col-md-8">
                               <div class="form-group">
-                                <label for="med_insurance">Are you a member of any Health/Medical Insurance?</label>
+                                <label class="right-q" for="med_insurance">Are you a member of any Health/Medical Insurance?</label>
                                 <label class="radio-inline">
                                   <input type="radio" name="med_insurance" value="1"> Yes
                                 </label>
@@ -266,7 +267,7 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <label for="nature_occupancy">Nature of Household Occupancy </label>
+                                <label class="right-q" for="nature_occupancy">Nature of Household Occupancy:</label>
                                 <label class="radio-inline">
                                   <input type="radio" name="nature_occupancy" value="0" checked> House and Lot Owner
                                 </label>
@@ -283,7 +284,7 @@
                           <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                <label for="is_voter">Are you a REGISTERED VOTER? </label>
+                                <label class="right-q" for="is_voter">Are you a REGISTERED VOTER? </label>
                                 <label class="radio-inline">
                                   <input type="radio" name="is_voter" value="1" checked> YES
                                 </label>
@@ -315,7 +316,7 @@
                           </div>
 
                           <div class="row">
-                            <div class="col-md-12" style="text-align: right;">
+                            <div class="col-md-12 submit-btn-container">
                               <input class="btn btn-lg btn-primary" type="submit" value="Submit" />
                             </div>
                           </div>
