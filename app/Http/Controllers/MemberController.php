@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Address;
-use App\GovernmentID;
-use App\HouseHold;
-use App\Member;
-use App\Status;
+use App\Models\User;
+use App\Models\Address;
+use App\Models\GovernmentID;
+use App\Models\Household;
+use App\Models\Member;
+use App\Models\Status;
 use Carbon\Carbon;
 use App\Http\Controllers\CommonController;
 use Auth;
@@ -24,7 +24,7 @@ class MemberController extends Controller
     public function index()
     {
         //
-        dd("TODO");
+        dd("DASHBOARD TODO...");
     }
 
     /**
@@ -34,6 +34,7 @@ class MemberController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->type == CommonController::USER_MEMBER) return redirect('');
         return view('member.create');
     }
 
@@ -103,7 +104,22 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        if (Auth::user()->type == CommonController::USER_MEMBER && Auth::user()->id != $id) return redirect('');
+        
+        $profile = User::select("users.*","members.*","government_ids.*", "households.*", "status.*");
+        $profile = $profile->leftJoin("members","members.user_id","=","users.id");
+        $profile = $profile->leftJoin("government_ids","government_ids.user_id","=","users.id");
+        $profile = $profile->leftJoin("households","households.user_id","=","users.id");
+        $profile = $profile->leftJoin("status","status.user_id","=","users.id");
+        //$profile = $profile->where("members.user_id",Auth::user()->id)->first();
+        $profile = $profile->where("members.user_id",$id)->first();
+        //$address = Address::where("user_id", Auth::user()->id)->get();
+        $address = Address::where("user_id", $id)->get();
+        //dd($address);
+        //dd($profile);
+        $profile_array = array($profile, $address);
+        return view('member.profile', compact("profile_array"));
     }
 
     /**
@@ -115,6 +131,7 @@ class MemberController extends Controller
     public function edit($id)
     {
         //
+        return view("member.edit");
     }
 
     /**
@@ -138,5 +155,62 @@ class MemberController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function create_admin() {
+        //dd("ADMIN");
+        if (Auth::user()->type != CommonController::USER_ADMIN) return redirect('');
+        return view ("member.create_admin");
+    }
+    public function create_admin_store(Request $request) {
+        //dd($request->all());
+        if (Auth::user()->type != CommonController::USER_ADMIN) return redirect('');
+        User::where("id", $request->user_id)->Update(["type" => CommonController::USER_ADMIN]);
+        $member = User::where("users.id", $request->user_id)->leftJoin("members","members.user_id","=","users.id")->first();
+        return back()->with('success', $member->lname.", ".$member->fname." ".$member->mname." has been successfully added as ADMIN!");
+    }
+    public function remove_admin(Request $request) {
+        //dd($request->all());
+        if (Auth::user()->type != CommonController::USER_ADMIN) return redirect('');
+        User::where("id", $request->user_id)->Update(["type" => CommonController::USER_MEMBER]);
+        return back()->with('success', $request->complete_name." has been successfully removed as ADMIN!");
+    }
+    
+    public function create_sector_president() {
+        //dd("PRES");
+        if (Auth::user()->type != CommonController::USER_ADMIN) return redirect('');
+        return view ("member.create_sector_president");
+    }
+    public function create_sector_president_store(Request $request) {
+        //dd($request->all());
+        if (Auth::user()->type != CommonController::USER_ADMIN) return redirect('');
+        User::where("id", $request->user_id)->Update(["type" => CommonController::USER_SECTOR_PRESIDENT]);
+        $member = User::where("users.id", $request->user_id)->leftJoin("members","members.user_id","=","users.id")->first();
+        return back()->with('success', $member->lname.", ".$member->fname." ".$member->mname." has been successfully added as SECTOR PRESIDENT!");
+    }
+    public function remove_sector_president(Request $request) {
+        //dd($request->all());
+        if (Auth::user()->type != CommonController::USER_ADMIN) return redirect('');
+        User::where("id", $request->user_id)->Update(["type" => CommonController::USER_MEMBER]);
+        return back()->with('success', $request->complete_name." has been successfully removed as SECTOR PRESIDENT!");
+    }
+    
+    public function create_encoder() {
+        //dd("ENCODER");
+        if (Auth::user()->type == CommonController::USER_MEMBER || Auth::user()->type == CommonController::USER_ENCODER) return redirect('');
+        return view ("member.create_encoder");
+    }
+    public function create_encoder_store(Request $request) {
+        //dd($request->all());
+        if (Auth::user()->type == CommonController::USER_MEMBER || Auth::user()->type == CommonController::USER_ENCODER) return redirect('');
+        User::where("id", $request->user_id)->Update(["type" => CommonController::USER_ENCODER]);
+        $member = User::where("users.id", $request->user_id)->leftJoin("members","members.user_id","=","users.id")->first();
+        return back()->with('success', $member->lname.", ".$member->fname." ".$member->mname." has been successfully added as ENCODER!");
+    }
+    public function remove_encoder(Request $request) {
+        //dd($request->all());
+        if (Auth::user()->type == CommonController::USER_MEMBER || Auth::user()->type == CommonController::USER_ENCODER) return redirect('');
+        User::where("id", $request->user_id)->Update(["type" => CommonController::USER_MEMBER]);
+        return back()->with('success', $request->complete_name." has been successfully removed as ENCODER!");
     }
 }

@@ -14,7 +14,7 @@
                   <div class="panel-body">
 
                     @if (!empty(session('success')))
-                      <h4><i class="text-success">{{{session('success')}}}</i></h4>
+                      <div class="alert alert-success" role="alert">{{{session('success')}}}</div>
                     @endif
 
                       <!-- Name -->
@@ -153,9 +153,9 @@
                           </div>
                           <div class="form-group">
                             <label for="num_children">Number of Children</label>
-                            <input type="number" class="form-control" id="num_children" name="num_children">
-                            <label for="num_dependencies">Number of Dependents</label>
-                            <input type="number" class="form-control" id="num_dependencies" name="num_dependencies">
+                            <input type="number" class="form-control" id="num_children" name="num_children" value="0">
+                            <label for="num_dependents">Number of Dependents</label>
+                            <input type="number" class="form-control" id="num_dependents" name="num_dependents" value="0">
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -308,8 +308,17 @@
                               <div class="form-group">
                                 <label for="sector_president_id">SECTOR PRESIDENT</label>
                                 <select id="sector_president_id" name="sector_president_id">
-                                  <!-- TODO get sector presidents -->
-                                  <option value=""></option>
+                                  <?php 
+                        				$encoders = Common::getSectorPresidents();
+                        			  ?>
+                        				@if (count($encoders) <= 0) 
+                        					<option></option>
+                        				@else
+                        					<option></option>
+                    						@foreach($encoders AS $v)
+                    						<option value="{{$v->id}}">{{$v->lname}}, {{$v->fname}} {{$v->mname}}</option>
+                    						@endforeach
+                        				@endif
                                 </select>
                               </div>
                             </div>

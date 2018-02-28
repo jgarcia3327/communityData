@@ -871,3 +871,10 @@
 </div>
 
 @endsection
+
+@section('javascript')
+    <!-- Plugins and scripts required by all views -->
+    <script src="{{ asset('js/Chart.min.js') }}"></script>
+    <!-- Custom scripts required by this view -->
+    <script src="{{ asset('js/views/main.js') }}"></script>
+@endsection

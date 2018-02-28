@@ -33,52 +33,9 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- <ul class="nav navbar-nav d-md-down-none">
-      <li class="nav-item px-3">
-        <a class="nav-link" href="#">Dashboard</a>
-      </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="#">Settings</a>
-      </li>
-    </ul> -->
-
     <ul class="nav navbar-nav ml-auto">
-      <!-- <li class="nav-item d-md-down-none">
-        <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
-      </li>
-      <li class="nav-item d-md-down-none">
-        <a class="nav-link" href="#"><i class="icon-list"></i></a>
-      </li>
-      <li class="nav-item d-md-down-none">
-        <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
-      </li> -->
       <li class="nav-item dropdown">
-        <!-- <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-        </a> -->
         {{ Auth::user()->email }}
-        <!-- <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-header text-center">
-            <strong>Account</strong>
-          </div>
-          <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-          <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-          <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-          <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span class="badge badge-warning">42</span></a>
-          <div class="dropdown-header text-center">
-            <strong>Settings</strong>
-          </div>
-          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
-          <a class="dropdown-item" href="#"><i class="fa fa-usd"></i> Payments<span class="badge badge-secondary">42</span></a>
-          <a class="dropdown-item" href="#"><i class="fa fa-file"></i> Projects<span class="badge badge-primary">42</span></a>
-          <div class="divider"></div>
-          <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock Account</a>
-          <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
-        </div> -->
       </li>
     </ul>
     <button class="navbar-toggler aside-menu-toggler" type="button">
@@ -94,7 +51,16 @@
             <li class="nav-item">
               <a class="nav-link nav-link-success" href="{{url('home')}}"><i class="icon-speedometer"></i> Dashboard </a><!-- <span class="badge badge-primary">NEW</span></a> -->
             </li>
+            
+            <li class="nav-title">
+             PROFILE
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('member/'.Auth::user()->id) }}" class="nav-link"><i class="fa fa-id-card"></i> My Info </a>
+            </li>
 
+			@if (Common::getUserType() == Common::USER_ADMIN)
+            <!-- Admin panel -->
             <li class="nav-title">
               ADD
             </li>
@@ -102,13 +68,13 @@
               <a href="{{ url('member/create') }}" class="nav-link"><i class="fa fa-user-plus"></i> Add Member </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link"><i class="fa fa-plus-circle"></i> Add Encoder</a>
+              <a href="{{ url('member/create_encoder') }}" class="nav-link"><i class="fa fa-plus-circle"></i> Add Encoder</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link"><i class="fa fa-plus-square"></i> Add Sector President</a>
+              <a href="{{ url('member/create_sector_president') }}" class="nav-link"><i class="fa fa-plus-square"></i> Add Sector President</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link"><i class="fa fa-user-secret"></i> Add Kaabag Admin</a>
+              <a href="{{ url('member/create_admin') }}" class="nav-link"><i class="fa fa-user-secret"></i> Add Kaabag Admin</a>
             </li>
             <li class="nav-title">
               REPORTS
@@ -116,56 +82,28 @@
             <li class="nav-item">
               <a class="nav-link" href="charts.html"><i class="fa fa-align-justify"></i> Charts</a>
             </li>
-            <!--
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-bell"></i> Notifications</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="notifications-alerts.html"><i class="icon-bell"></i> Alerts</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="notifications-badge.html"><i class="icon-bell"></i> Badge</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="notifications-modals.html"><i class="icon-bell"></i> Modals</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets <span class="badge badge-primary">NEW</span></a>
-            </li>
-          -->
             <li class="divider"></li>
-
-            <!--
+            <!-- End admin panel -->
+            @elseif (Common::getUserType() == Common::USER_SECTOR_PRESIDENT)
             <li class="nav-title">
-              Extras
-            </li>
-            <li class="nav-item nav-dropdown">
-              <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
-              <ul class="nav-dropdown-items">
-                <li class="nav-item">
-                  <a class="nav-link" href="pages-login.html" target="_top"><i class="icon-star"></i> Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages-register.html" target="_top"><i class="icon-star"></i> Register</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error 404</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages-500.html" target="_top"><i class="icon-star"></i> Error 500</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item mt-auto">
-              <a class="nav-link nav-link-success" href="http://coreui.io/" target="_top"><i class="icon-cloud-download"></i> Download CoreUI</a>
+              ADD
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-link-danger" href="http://coreui.io/pro/" target="_top"><i class="icon-layers"></i> Try CoreUI <strong>PRO</strong></a>
+              <a href="{{ url('member/create_encoder') }}" class="nav-link"><i class="fa fa-plus-circle"></i> Add Encoder</a>
             </li>
-          -->
-
+            <li class="nav-item">
+              <a href="{{ url('member/create') }}" class="nav-link"><i class="fa fa-user-plus"></i> Add Member </a>
+            </li>
+            @elseif (Common::getUserType() == Common::USER_ENCODER)
+            <li class="nav-title">
+              ADD
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('member/create') }}" class="nav-link"><i class="fa fa-user-plus"></i> Add Member </a>
+            </li>
+            @else
+            <!--  User panel here... -->
+			@endif
           </ul>
         </nav>
         <button class="sidebar-minimizer brand-minimizer" type="button"></button>
@@ -173,22 +111,6 @@
 
       <!-- Main content -->
       <main class="main">
-
-        <!-- Breadcrumb -->
-        <!-- <ol class="breadcrumb"> -->
-          <!-- <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item"><a href="#">Admin</a></li>
-          <li class="breadcrumb-item active">Dashboard</li> -->
-
-          <!-- Breadcrumb Menu-->
-          <!-- <li class="breadcrumb-menu d-md-down-none">
-            <div class="btn-group" role="group" aria-label="Button group">
-              <a class="btn" href="#"><i class="icon-speech"></i></a>
-              <a class="btn" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
-              <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
-            </div>
-          </li>-->
-        <!-- </ol> -->
 
         <div class="container-fluid blade-container">
 
@@ -199,25 +121,26 @@
       </main>
 
       <aside class="aside-menu">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="fa fa-gear"></i></a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="fa fa-gear"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#settings" role="tab"><i class="fa fa-gear"></i></a>
-          </li> -->
-        </ul>
-
+        
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane active" id="timeline" role="tabpanel">
             <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
-              <small><b>Today</b></small>
+              <small>
+              <strong>
+              	<a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+              </strong>
+              </small>
             </div>
             <hr class="transparent mx-3 my-0">
+            <!-- 
             <div class="callout callout-warning m-0 py-3">
               <div class="avatar float-right">
                 <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
@@ -307,173 +230,8 @@
               </div>
             </div>
             <hr class="mx-3 my-0">
+            -->
           </div>
-
-          <!-- <div class="tab-pane p-3" id="messages" role="tabpanel">
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-            <hr>
-            <div class="message">
-              <div class="py-3 pb-5 mr-3 float-left">
-                <div class="avatar">
-                  <img src="img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
-                  <span class="avatar-status badge-success"></span>
-                </div>
-              </div>
-              <div>
-                <small class="text-muted">Lukasz Holeczek</small>
-                <small class="text-muted float-right mt-1">1:52 PM</small>
-              </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
-              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
-            </div>
-          </div> -->
-
-          <!-- <div class="tab-pane p-3" id="settings" role="tabpanel">
-            <h6>Settings</h6>
-
-            <div class="aside-options">
-              <div class="clearfix mt-4">
-                <small><b>Option 1</b></small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                  <input type="checkbox" class="switch-input" checked="">
-                  <span class="switch-label" data-on="On" data-off="Off"></span>
-                  <span class="switch-handle"></span>
-                </label>
-              </div>
-              <div>
-                <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-              </div>
-            </div>
-
-            <div class="aside-options">
-              <div class="clearfix mt-3">
-                <small><b>Option 2</b></small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                  <input type="checkbox" class="switch-input">
-                  <span class="switch-label" data-on="On" data-off="Off"></span>
-                  <span class="switch-handle"></span>
-                </label>
-              </div>
-              <div>
-                <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-              </div>
-            </div>
-
-            <div class="aside-options">
-              <div class="clearfix mt-3">
-                <small><b>Option 3</b></small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                  <input type="checkbox" class="switch-input">
-                  <span class="switch-label" data-on="On" data-off="Off"></span>
-                  <span class="switch-handle"></span>
-                </label>
-              </div>
-            </div>
-
-            <div class="aside-options">
-              <div class="clearfix mt-3">
-                <small><b>Option 4</b></small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
-                  <input type="checkbox" class="switch-input" checked="">
-                  <span class="switch-label" data-on="On" data-off="Off"></span>
-                  <span class="switch-handle"></span>
-                </label>
-              </div>
-            </div>
-
-            <hr>
-            <h6>System Utilization</h6>
-
-            <div class="text-uppercase mb-1 mt-4">
-              <small><b>CPU Usage</b></small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">348 Processes. 1/4 Cores.</small>
-
-            <div class="text-uppercase mb-1 mt-2">
-              <small><b>Memory Usage</b></small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">11444GB/16384MB</small>
-
-            <div class="text-uppercase mb-1 mt-2">
-              <small><b>SSD 1 Usage</b></small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">243GB/256GB</small>
-
-            <div class="text-uppercase mb-1 mt-2">
-              <small><b>SSD 2 Usage</b></small>
-            </div>
-            <div class="progress progress-xs">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <small class="text-muted">25GB/256GB</small>
-          </div> -->
 
         </div>
       </aside>
@@ -494,17 +252,9 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/pace.min.js') }}"></script>
 
-    <!-- Plugins and scripts required by all views -->
-    <script src="{{ asset('js/Chart.min.js') }}"></script>
-
     <!-- CoreUI main scripts -->
 
     <script src="{{ asset('js/app_admin_theme.js') }}"></script>
-
-    <!-- Plugins and scripts required by this views -->
-
-    <!-- Custom scripts required by this view -->
-    <script src="{{ asset('js/views/main.js') }}"></script>
 
     @yield('javascript')
 
